@@ -1,0 +1,38 @@
+$modalColor: rgba(0, 0, 0, 0.3);
+$imgBaseUrl: "";
+$imgBaseLocalUrl: "@/assets/icon/";
+
+@mixin scaleFont($fontSize) {
+  font-size: $fontSize * 2;
+  transform: scale(0.5) translate(50%, -50%);
+}
+
+@mixin bg($bg, $width: 560px, $height: 740px) {
+  width: $width;
+  height: $height;
+
+  background: {
+    image: url("#{$imgBaseUrl}#{$bg}");
+    position: center;
+    repeat: no-repeat;
+    size: 100%;
+  }
+}
+
+@mixin localbg($bg, $width: 560px, $height: 740px) {
+  width: $width;
+  height: $height;
+
+  background: {
+    image: url("#{$imgBaseLocalUrl}#{$bg}");
+    position: center;
+    repeat: no-repeat;
+    size: 100%;
+  }
+}
+
+@mixin flexCenter {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

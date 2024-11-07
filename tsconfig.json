@@ -1,0 +1,45 @@
+{
+  "compilerOptions": {
+    "lib": ["ES2020", "DOM"],
+    "module": "ESNext",
+    "skipLibCheck": true,
+
+    /* Bundler mode */
+    "moduleResolution": "bundler",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": false,
+
+    /* Linting */
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noFallthroughCasesInSwitch": true,
+
+    "target": "esnext",
+    "jsx": "react-jsx",
+
+    "experimentalDecorators": true,
+
+    "noImplicitAny": false,
+
+    "useDefineForClassFields": true,
+    "baseUrl": ".", // 解析非相对模块的基础地址，默认是当前目录
+    "types": ["vite/client", "node"],
+    "allowJs": true,
+    "sourceMap": true,
+    "esModuleInterop": true,
+    "noLib": false,
+    "forceConsistentCasingInFileNames": true,
+    "allowSyntheticDefaultImports": true,
+    "strictFunctionTypes": false,
+    "removeComments": true,
+    "paths": {
+      // 路径映射，相对于baseUrl
+      "@/*": ["src/*"],
+      "#/*": ["types/*"]
+    }
+  },
+  "include": ["src", "src/utils", "vite-env.d.ts"],
+  "exclude": ["node_modules", "dist"]
+}
