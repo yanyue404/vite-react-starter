@@ -1,21 +1,27 @@
 import React, { useEffect, useState } from "react";
 import { Tabs } from "antd-mobile";
 import "./Segment.scss";
-import { useThrottleFn } from "ahooks";
+import { useThrottleFn, useMount } from "ahooks";
 import { faker } from "@faker-js/faker";
 
+const loremLength = 16;
+
+let navHeight,
+  navOffsetTop = 0;
+
 const tabItems = [
-  { key: "1", title: "第一项", text: faker.lorem.lines(8) },
-  { key: "2", title: "第二项", text: faker.lorem.lines(8) },
-  { key: "3", title: "第三项", text: faker.lorem.lines(8) },
-  { key: "4", title: "第四项", text: faker.lorem.lines(8) },
+  { key: 1, title: "第一项", text: faker.lorem.lines(loremLength) },
+  { key: 2, title: "第二项", text: faker.lorem.lines(loremLength) },
+  { key: 3, title: "第三项", text: faker.lorem.lines(loremLength) },
+  { key: 4, title: "第四项", text: faker.lorem.lines(loremLength) },
 ];
 
 const tabHeight = 50;
 
 export default function Segment() {
-  const [activeKey, setActiveKey] = useState("1");
+  const [activeKey, setActiveKey] = useState(1);
 
+  // 滚动回显
   const { run: handleScroll } = useThrottleFn(
     () => {
       let currentKey = tabItems[0].key;
@@ -30,8 +36,6 @@ export default function Segment() {
           break;
         }
       }
-      console.log("currentKey", currentKey);
-
       setActiveKey(currentKey);
     },
     {
@@ -48,20 +52,35 @@ export default function Segment() {
     };
   }, []);
 
+  const getOffetList = () => {
+    const elements = document.querySelectorAll('[class^="slot-"]');
+    return Array.from(elements).map((ele: HTMLElement) => {
+      return ele.offsetTop;
+    });
+  };
+
+  useMount(() => {
+    console.log("mounted");
+    const tabListDom = document.querySelector(".adm-tabs-tab-list") as HTMLElement;
+    navHeight = tabListDom.offsetHeight;
+    navOffsetTop = tabListDom.offsetTop;
+  });
+
+  const clickTab = (index = 1) => {
+    console.log("click index", index);
+    const offTopList = getOffetList();
+    const t = Math.min(
+      navOffsetTop + offTopList[index - 1] - navHeight + 1,
+      (document.documentElement.scrollHeight || document.body.scrollHeight) - innerHeight
+    );
+    document.documentElement.scrollTop = t;
+    document.body.scrollTop = t;
+  };
+
   return (
     <>
       <div className="tabsContainer">
-        <Tabs
-          activeKey={activeKey}
-          onChange={(key) => {
-            console.log("key", key);
-
-            document.getElementById(`anchor-${key}`)?.scrollIntoView();
-            window.scrollTo({
-              top: window.scrollY - 48,
-            });
-          }}
-        >
+        <Tabs activeKey={activeKey} onChange={(key) => clickTab(Number(key))}>
           {tabItems.map((item) => (
             <Tabs.Tab title={item.title} key={item.key} />
           ))}
@@ -69,7 +88,7 @@ export default function Segment() {
       </div>
       <div className="content">
         {tabItems.map((item) => (
-          <div key={item.key}>
+          <div key={item.key} className={`slot-${item.key}`}>
             <h2 id={`anchor-${item.key}`}>{item.title}</h2>
             {item.text}
           </div>
