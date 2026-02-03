@@ -1,23 +1,13 @@
 import axios from "axios";
 
-interface ErrMsg {
-  message?: string;
-  status?: string;
-  url?: string;
-}
+// 如果需要加载提示，可以使用 Toast.show() 或其他 antd-mobile API
+// function startLoading() {
+//   // 使用 Toast 或其他加载组件
+// }
 
-function startLoading() {
-  const loading = showLoadingToast({ message: "加载中...", forbidClick: true, duration: 0 });
-  return loading;
-}
-
-function endLoading(loading) {
-  loading.close();
-}
-
-// setTimeout(() => {
-//   loading.close()
-// }, 2000)
+// function endLoading() {
+//   // 关闭加载提示
+// }
 
 const httpApi = axios.create({
   baseURL: `${location.origin}`,

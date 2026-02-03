@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Tabs } from "antd-mobile";
 import "./Segment.scss";
 import { useThrottleFn, useMount } from "ahooks";
@@ -54,14 +54,14 @@ export default function Segment() {
 
   const getOffetList = () => {
     const elements = document.querySelectorAll('[class^="slot-"]');
-    return Array.from(elements).map((ele: HTMLElement) => {
+    return Array.from(elements).map((ele) => {
       return ele.offsetTop;
     });
   };
 
   useMount(() => {
     console.log("mounted");
-    const tabListDom = document.querySelector(".adm-tabs-tab-list") as HTMLElement;
+    const tabListDom = document.querySelector(".adm-tabs-tab-list");
     navHeight = tabListDom.offsetHeight;
     navOffsetTop = tabListDom.offsetTop;
   });

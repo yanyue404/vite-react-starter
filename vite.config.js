@@ -9,7 +9,7 @@ export default defineConfig({
   plugins: [react()],
   resolve: {
     alias: {
-      "@": path.join(__dirname, "src"),
+      "@": path.join(process.cwd(), "src"),
     },
   },
   css: {

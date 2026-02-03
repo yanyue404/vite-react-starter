@@ -1,4 +1,5 @@
 import "./InfoFillItem.scss";
+
 export default function InfoFillItem({ index, title }) {
   return (
     <div className="info-fill-item">

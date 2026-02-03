@@ -1,4 +1,4 @@
-import { useOnlineStatus } from "@/hook/useOnlineStatus.js";
+import { useOnlineStatus } from "@/hook/useOnlineStatus";
 
 function StatusBar() {
   const isOnline = useOnlineStatus();

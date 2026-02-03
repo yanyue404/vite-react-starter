@@ -4,7 +4,8 @@ import InfoFillItem from "@/components/common/InfoFillItem/InfoFillItem";
 import FormRow from "@/components/common/FormRow/FormRow";
 import FormInput from "@/components/common/FormInput/FormInput";
 import "./applicat-info.scss";
-export default memo(function ApplicantInfo() {
+
+function ApplicantInfo() {
   console.log("applicant-info render.");
 
   const [applicant, updateApplicant] = useImmer({
@@ -46,4 +47,6 @@ export default memo(function ApplicantInfo() {
       <div> {JSON.stringify(applicant)}</div>
     </div>
   );
-});
+}
+
+export default memo(ApplicantInfo);
